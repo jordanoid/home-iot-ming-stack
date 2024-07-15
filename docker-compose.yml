@@ -8,15 +8,15 @@ services:
         restart: unless-stopped
         volumes:
             - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
-            - ./mosquitto/data:/mosquitto/data
+            - mosquitto-data:/mosquitto/data
             - ./mosquitto/log:/mosquitto/log
         image: eclipse-mosquitto:latest
     node-red:
         ports:
             - 1880:1880
-        restart: always
+        restart: unless-stopped
         volumes:
-            - node_red_data:/data
+            - node-red-data:/data
         container_name: nodered
         image: nodered/node-red:latest
     influxdb2:
@@ -47,7 +47,8 @@ services:
             - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
 
 volumes:
-  node_red_data:
+  node-red-data:
+  mosquitto-data:
   influxdb2-data:
   influxdb2-config:
   grafana-storage:
