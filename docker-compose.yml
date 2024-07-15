@@ -8,8 +8,8 @@ services:
         restart: unless-stopped
         volumes:
             - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
-            - mosquitto_data:/mosquitto/data
-            - mosquitto_log:/mosquitto/log
+            - ./mosquitto/data:/mosquitto/data
+            - ./mosquitto/log:/mosquitto/log
         image: eclipse-mosquitto:latest
     node-red:
         ports:
@@ -48,8 +48,6 @@ services:
 
 volumes:
   node_red_data:
-  mosquitto_data:
-  mosquitto_log:
   influxdb2-data:
   influxdb2-config:
   grafana-storage:
