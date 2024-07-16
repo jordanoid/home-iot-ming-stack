@@ -11,6 +11,8 @@ services:
             - mosquitto-data:/mosquitto/data
             - ./mosquitto/log:/mosquitto/log
         image: eclipse-mosquitto:latest
+        environment:
+            - TZ=Asia/Jakarta
     node-red:
         ports:
             - 1880:1880
@@ -19,6 +21,8 @@ services:
             - node-red-data:/data
         container_name: nodered
         image: nodered/node-red:latest
+        environment:
+            - TZ=Asia/Jakarta
     influxdb2:
         container_name: influxdb2
         ports:
@@ -28,6 +32,7 @@ services:
             - influxdb2-config:/etc/influxdb2
         restart: unless-stopped
         environment:
+            - TZ=Asia/Jakarta
             - DOCKER_INFLUXDB_INIT_MODE=setup
             - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUX_USERNAME}
             - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUX_PASSWORD}
@@ -43,6 +48,7 @@ services:
         volumes:
             - grafana-storage:/var/lib/grafana
         environment:
+            - TZ=Asia/Jakarta
             - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
             - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
 
